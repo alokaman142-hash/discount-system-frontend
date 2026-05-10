@@ -15,7 +15,8 @@ const CustomerDashboard = () => {
   const fetchDiscounts = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/discounts', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await axios.get(`${apiUrl}/api/discounts`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setDiscounts(res.data);
@@ -27,7 +28,8 @@ const CustomerDashboard = () => {
   const checkEligibility = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://localhost:5000/api/discounts/check-eligibility', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await axios.post(`${apiUrl}/api/discounts/check-eligibility`, {
         ruleId: selectedDiscount,
         orderValue: parseFloat(orderValue)
       }, {
@@ -42,7 +44,8 @@ const CustomerDashboard = () => {
   const applyDiscount = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://localhost:5000/api/discounts/apply', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await axios.post(`${apiUrl}/api/discounts/apply`, {
         ruleId: selectedDiscount,
         orderValue: parseFloat(orderValue)
       }, {

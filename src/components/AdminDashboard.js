@@ -17,7 +17,8 @@ const AdminDashboard = () => {
   const fetchRules = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/discounts', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await axios.get(`${apiUrl}/api/discounts`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRules(res.data);
@@ -29,7 +30,8 @@ const AdminDashboard = () => {
   const fetchUsages = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/discounts/usage', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      const res = await axios.get(`${apiUrl}/api/discounts/usage`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUsages(res.data);
@@ -51,7 +53,8 @@ const AdminDashboard = () => {
   const createRule = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:5000/api/discounts', {
+      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+      await axios.post(`${apiUrl}/api/discounts`, {
         name,
         description,
         discountPercent: parseFloat(discountPercent),
